@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <title lang="en">Test Mobile Notifications</title>
+ <meta charset="UTF-8">
+ <meta charset="ISO-8859-1">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+<h1>Test Notification</h1>
+<button id="but" onclick="notifyMe();" >Some</button>
+<div id="result"></div>
+
+<script>
+  function notifyMe() {
+    navigator.serviceWorker.register('sw.js');
+    Notification.requestPermission(function(result) {
+      if (result === 'granted') {
+        navigator.serviceWorker.ready.then(function(registration) {
+          registration.showNotification('Notification with ServiceWorker');
+        });
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
